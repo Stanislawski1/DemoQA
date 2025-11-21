@@ -2,6 +2,7 @@ package pages.base;
 
 import java.time.Duration;
 
+import elements.Elements;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -15,6 +16,7 @@ public class BasePage {
 
     public final String BASE_URL = "https://demoqa.com/";
 
+
     public BasePage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -27,4 +29,5 @@ public class BasePage {
                         .executeScript("return document.readyState")
                         .toString().equals("complete");        }
         }; }
+
 }

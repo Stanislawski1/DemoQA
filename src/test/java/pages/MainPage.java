@@ -6,10 +6,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
 
-public class MainPage extends BasePage {
+import static elements.Elements.ELEMENTS_BUTTON;
+import static elements.Elements.TITLE;
 
-    protected By TITLE = By.xpath("//div[@class='card-body']//h5[contains(text(), 'Elements')]");
-    protected By ELEMENTS_BUTTON = By.xpath("//div[@class='card-body']//h5[contains(text(), 'Elements')]");
+public class MainPage extends BasePage {
 
     public MainPage(WebDriver driver) {
         super(driver);
