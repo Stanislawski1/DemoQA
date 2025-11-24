@@ -1,4 +1,4 @@
-package tests;
+package tests.base;
 
 
 import org.openqa.selenium.WebDriver;
@@ -8,20 +8,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
+import pages.ElementsPage;
 import pages.MainPage;
+import plugins.TestListener;
 
 import java.time.Duration;
 import java.util.HashMap;
 
+@Listeners(TestListener.class)
 public class BaseTest {
 
     protected WebDriver driver;
 
     protected MainPage mainPage;
+    protected ElementsPage elementsPage;
 
 
     @Parameters({"browser"})
@@ -57,9 +58,8 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         mainPage = new MainPage(driver);
+        elementsPage = new ElementsPage(driver);
     }
-
-
 
     @AfterMethod
     public void tearDown(ITestResult result) {
