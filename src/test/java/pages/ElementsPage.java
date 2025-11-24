@@ -102,4 +102,13 @@ public class ElementsPage extends BasePage {
         Assert.assertTrue(driver.findElement(By.id("linkResponse")).getText().contains(expectedStatus));
         return this;
     }
+
+    public FormPage goToFormPage() {
+        org.openqa.selenium.WebElement el = driver.findElement(FORM_PAGE_BUTTON);
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", el);
+        el.click();
+        driver.findElement(By.xpath("//span[contains(text(),'Practice Form')]")).click();
+        return new FormPage(driver);
+    }
+
 }

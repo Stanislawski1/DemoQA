@@ -23,7 +23,17 @@ public class Checkbox {
         WebElement labelElement = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath(String.format("//span[contains(text(),'%s')]", label))
         ));
+        scrollToElement(labelElement);
         labelElement.click();
+    }
+
+    private void scrollToElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", element
+        );
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block: 'end', behavior: 'smooth'});", element
+        );
     }
 
 }

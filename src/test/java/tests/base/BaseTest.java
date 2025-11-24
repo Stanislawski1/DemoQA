@@ -9,8 +9,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import pages.ElementsPage;
-import pages.MainPage;
+import pages.*;
 import plugins.TestListener;
 
 import java.time.Duration;
@@ -23,6 +22,9 @@ public class BaseTest {
 
     protected MainPage mainPage;
     protected ElementsPage elementsPage;
+    protected FormPage formPage;
+    protected AlertsFrameWindowPage alertsFrameWindowPage;
+    protected WidgetsPage widgetsPage;
 
 
     @Parameters({"browser"})
@@ -59,6 +61,9 @@ public class BaseTest {
 
         mainPage = new MainPage(driver);
         elementsPage = new ElementsPage(driver);
+        formPage = new FormPage(driver);
+        alertsFrameWindowPage = new AlertsFrameWindowPage(driver);
+        widgetsPage = new WidgetsPage(driver);
     }
 
     @AfterMethod
