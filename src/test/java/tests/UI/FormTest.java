@@ -1,18 +1,17 @@
-package tests;
+package tests.UI;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import org.testng.annotations.Test;
-import tests.base.BaseTest;
+import tests.BaseTest;
 
 public class FormTest extends BaseTest {
 
     @Test
     public void testOfPracticeForm() {
-        mainPage.open()
+        pageManager.getMainPage().open()
                 .isPageOpened()
                         .moveToElements();
-        elementsPage.goToFormPage();
-        formPage.isPageOpened()
+        pageManager.getElementsPage().goToFormPage();
+        pageManager.getFormPage().isPageOpened()
                 .fillOutForm();
     }
 

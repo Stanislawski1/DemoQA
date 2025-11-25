@@ -1,13 +1,14 @@
-package pages;
+package pages.Alerts;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import pages.base.BasePage;
+import pages.Widgets.WidgetsPage;
+import pages.BasePage;
 
 import static elements.Elements.*;
+
 
 public class AlertsFrameWindowPage extends BasePage {
 

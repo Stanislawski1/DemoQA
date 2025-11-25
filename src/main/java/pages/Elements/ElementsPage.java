@@ -1,13 +1,13 @@
-package pages;
+package pages.Elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.asserts.SoftAssert;
-import pages.base.BasePage;
+import pages.Form.FormPage;
+import pages.BasePage;
 import wrappers.*;
 
 import static elements.Elements.*;
@@ -29,7 +29,7 @@ public class ElementsPage extends BasePage {
         org.openqa.selenium.WebElement el = driver.findElement(TEXT_BOX_BUTTON);
         ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", el);
         el.click();
-        new Input (driver, "Email").write("John_Doe@gmail.com");
+        new Input(driver, "Email").write("John_Doe@gmail.com");
         new TextArea(driver, "Current Address").write("1234 Elm Street, Springfield, IL 62704");
         new TextArea(driver, "Permanent Address").write("5678 Oak Avenue, Springfield, IL 62705");
         org.openqa.selenium.WebElement element = driver.findElement(SUBMIT_BUTTON);

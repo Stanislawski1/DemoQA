@@ -1,6 +1,7 @@
-package tests.base;
+package tests;
 
 
+import manager.PageManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,23 +10,18 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import pages.*;
 import plugins.TestListener;
+import manager.PageManager;
 
 import java.time.Duration;
 import java.util.HashMap;
 
-@Listeners(TestListener.class)
+@Listeners({TestListener.class})
 public class BaseTest {
 
     protected WebDriver driver;
 
-    protected MainPage mainPage;
-    protected ElementsPage elementsPage;
-    protected FormPage formPage;
-    protected AlertsFrameWindowPage alertsFrameWindowPage;
-    protected WidgetsPage widgetsPage;
-
+    public PageManager pageManager;
 
     @Parameters({"browser"})
     @BeforeMethod
@@ -54,16 +50,13 @@ public class BaseTest {
             driver = new FirefoxDriver(options);
         }
 
+        pageManager = new PageManager(driver);
+
         context.setAttribute("driver", driver);
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        mainPage = new MainPage(driver);
-        elementsPage = new ElementsPage(driver);
-        formPage = new FormPage(driver);
-        alertsFrameWindowPage = new AlertsFrameWindowPage(driver);
-        widgetsPage = new WidgetsPage(driver);
     }
 
     @AfterMethod

@@ -1,10 +1,9 @@
-package pages;
+package pages.Main;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.base.BasePage;
+import pages.BasePage;
 
 import static elements.Elements.ELEMENTS_BUTTON;
 import static elements.Elements.TITLE;

@@ -1,17 +1,23 @@
-package tests;
+package tests.UI;
+
+
 
 import org.testng.annotations.Test;
-import tests.base.BaseTest;
+import tests.BaseTest;
+
 
 public class AlertsFrameWindowTests extends BaseTest {
 
     @Test
     public void testOfNewTab() {
-        mainPage.open()
+        pageManager
+                .getMainPage().open()
                 .isPageOpened()
                 .moveToElements();
-        formPage.goToAlertsPage();
-        alertsFrameWindowPage.goToWindowsPage()
+        pageManager
+                .getFormPage().goToAlertsPage();
+        pageManager
+                .getAlertsFrameWindowPage().goToWindowsPage()
                 .isPageOpened()
                 .goToWindowsPage()
                 .useTab();
@@ -19,11 +25,14 @@ public class AlertsFrameWindowTests extends BaseTest {
 
     @Test
     public void testOfNewWindow() {
-        mainPage.open()
+        pageManager
+                .getMainPage().open()
                 .isPageOpened()
                 .moveToElements();
-        formPage.goToAlertsPage();
-        alertsFrameWindowPage.goToWindowsPage()
+        pageManager
+                .getFormPage().goToAlertsPage();
+        pageManager
+                .getAlertsFrameWindowPage().goToWindowsPage()
                 .isPageOpened()
                 .goToWindowsPage()
                 .useWindow();
@@ -31,11 +40,14 @@ public class AlertsFrameWindowTests extends BaseTest {
 
     @Test
     public void testOfNewWindowMessage() {
-        mainPage.open()
+        pageManager
+                .getMainPage().open()
                 .isPageOpened()
                 .moveToElements();
-        formPage.goToAlertsPage();
-        alertsFrameWindowPage.goToWindowsPage()
+        pageManager
+                .getFormPage().goToAlertsPage();
+        pageManager
+                .getAlertsFrameWindowPage().goToWindowsPage()
                 .isPageOpened()
                 .goToWindowsPage()
                 .useWindowMessage();
@@ -43,11 +55,14 @@ public class AlertsFrameWindowTests extends BaseTest {
 
     @Test
     public void testOfAlerts() {
-        mainPage.open()
+        pageManager
+                .getMainPage().open()
                 .isPageOpened()
                 .moveToElements();
-        formPage.goToAlertsPage();
-        alertsFrameWindowPage.goToAlertsPage()
+        pageManager
+                .getFormPage().goToAlertsPage();
+        pageManager
+                .getAlertsFrameWindowPage().goToAlertsPage()
                 .isPageOpened()
                 .goToAlert();
     }

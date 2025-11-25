@@ -1,10 +1,10 @@
-package pages;
+package pages.Form;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.base.BasePage;
+import pages.Alerts.AlertsFrameWindowPage;
+import pages.BasePage;
 import wrappers.*;
 
 import static elements.Elements.*;

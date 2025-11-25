@@ -1,28 +1,28 @@
-package tests;
+package tests.UI;
 
 import org.testng.annotations.Test;
-import tests.base.BaseTest;
+import tests.BaseTest;
 
 public class WidgetsTests extends BaseTest {
 
     @Test
     public void testOfAccordians() {
-        mainPage.open()
+        pageManager.getMainPage().open()
                 .isPageOpened()
                         .moveToElements();
-        alertsFrameWindowPage.goToWidgetsPage();
-        widgetsPage.goToAccordianPage()
+        pageManager.getAlertsFrameWindowPage().goToWidgetsPage();
+        pageManager.getWidgetsPage().goToAccordianPage()
                 .isPageOpened()
                 .useAccordian();
     }
 
     @Test
     public void testOfAutoComplete() {
-        mainPage.open()
+        pageManager.getMainPage().open()
                 .isPageOpened()
                         .moveToElements();
-        alertsFrameWindowPage.goToWidgetsPage();
-        widgetsPage.goToAutoCompletePage()
+        pageManager.getAlertsFrameWindowPage().goToWidgetsPage();
+        pageManager.getWidgetsPage().goToAutoCompletePage()
                 .isPageOpened()
                 .useAutoComplete();
     }

@@ -1,72 +1,72 @@
-package tests;
+package tests.UI;
 
 import dto.NavigationData;
 import org.testng.annotations.Test;
-import tests.base.BaseTest;
+import tests.BaseTest;
 
 public class ElementsTest extends BaseTest {
 
     @Test
     public void testOfTextBox() {
-        mainPage.open()
+        pageManager.getMainPage().open()
                 .isPageOpened()
                 .moveToElements();
-        elementsPage.isPageOpened()
+        pageManager.getElementsPage().isPageOpened()
                 .useTextBox();
     }
 
     @Test
     public void testOfCheckBox() throws InterruptedException {
-        mainPage.open()
+        pageManager.getMainPage().open()
                 .isPageOpened()
                 .moveToElements();
-        elementsPage.isPageOpened()
+        pageManager.getElementsPage().isPageOpened()
                 .useCheckBox();
     }
 
     @Test
     public void testOfRadioButton() {
-        mainPage.open()
+        pageManager.getMainPage().open()
                 .isPageOpened()
                 .moveToElements();
-        elementsPage.isPageOpened()
+        pageManager.getElementsPage().isPageOpened()
                 .useRadioButton();
     }
 
     @Test
     public void testOfWebTables() {
-        mainPage.open()
+        pageManager.getMainPage().open()
                 .isPageOpened()
                 .moveToElements();
-        elementsPage.isPageOpened()
+        pageManager.getElementsPage().isPageOpened()
                 .useWebTables();
     }
 
     @Test
     public void testOfButtons() {
-        mainPage.open()
+        pageManager.getMainPage().open()
                 .isPageOpened()
                 .moveToElements();
-        elementsPage.isPageOpened()
+        pageManager.getElementsPage().isPageOpened()
                 .useButtons();
     }
 
     @Test(dataProvider = "navigationData", dataProviderClass = NavigationData.class)
     public void testOfLinks(String linkText, String expectedUrlPart) {
-        mainPage.open()
+        pageManager.getMainPage().open()
                 .isPageOpened()
                 .moveToElements();
-        elementsPage.isPageOpened()
+        pageManager.getElementsPage().isPageOpened()
                 .useLinks(linkText, expectedUrlPart);
 
     }
 
     @Test(dataProvider = "responseAnswers", dataProviderClass = NavigationData.class)
     public void testOfResponse(String linkText, String expectedStatus) {
-        mainPage.open()
+        pageManager.getMainPage().open()
                 .isPageOpened()
                 .moveToElements();
-        elementsPage.isPageOpened()
+        pageManager.getElementsPage().isPageOpened()
                 .useResponse(linkText, expectedStatus);
 
     }
