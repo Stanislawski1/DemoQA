@@ -1,8 +1,10 @@
 package pages.Widgets;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -14,6 +16,9 @@ import java.util.List;
 import static elements.Elements.*;
 
 public class WidgetsPage extends BasePage {
+
+    public static final By INPUT_RESULT = By.xpath("//div[@class='css-12jo7m5 auto-complete__multi-value__label']");
+    public static final By SINGLE_INPUT_RESULT = By.xpath("//div[@class='auto-complete__single-value css-1uccc91-singleValue']");
 
     public WidgetsPage(WebDriver driver) {
         super(driver);
@@ -51,30 +56,17 @@ public class WidgetsPage extends BasePage {
         return this;
     }
 
-    public WidgetsPage useAutoComplete() {
-        driver.findElement(MULTI_COLOR_INPUT).sendKeys("Red");
-        List<WebElement> suggestions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.xpath("//div[@id='react-select-2-listbox']//div[contains(@class, 'css-11unzgr')]")
-        ));
-        for (WebElement suggestion : suggestions) {
-            if (suggestion.getText().equals("Red")) {
-                suggestion.click();
-                break;
-            }
-        }
-        driver.findElement(MULTI_COLOR_INPUT).sendKeys("Bl");
-        suggestions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.xpath("//div[@id='react-select-2-listbox']//div[contains(@class, 'css-11unzgr')]")
-        ));
-        for (WebElement suggestion : suggestions) {
-            if (suggestion.getText().equals("Blue")) {
-                suggestion.click();
-                break;
-            }
-        }
-        String multiColors = driver.findElement(MULTI_COLOR_INPUT).getAttribute("value");
-        Assert.assertTrue(multiColors.contains("Red"), "Red color is not selected in multi-select");
-        Assert.assertTrue(multiColors.contains("Blue"), "Blue color is not selected in multi-select");
+    public WidgetsPage useAutoComplete(String value) throws InterruptedException {
+        Actions actions = new Actions(driver);
+        WebElement multiColorInput = driver.findElement(MULTI_COLOR_INPUT);
+        multiColorInput.sendKeys(value);
+        multiColorInput.sendKeys(Keys.ENTER);
+        Assert.assertTrue(driver.findElement(INPUT_RESULT).getText().contains(value), "Value not found in the input result");
+        WebElement singleColorInput = driver.findElement(SINGLE_COLOR_INPUT);
+        singleColorInput.sendKeys(value);
+        singleColorInput.sendKeys(Keys.ENTER);
+        String actualValue = singleColorInput.getAttribute("value");
+        Assert.assertTrue(driver.findElement(SINGLE_INPUT_RESULT).getText().contains(value), "Value not found in the input result");
         return this;
     }
 }

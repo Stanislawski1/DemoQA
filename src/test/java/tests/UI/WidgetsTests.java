@@ -17,13 +17,13 @@ public class WidgetsTests extends BaseTest {
     }
 
     @Test
-    public void testOfAutoComplete() {
+    public void testOfAutoComplete() throws InterruptedException {
         pageManager.getMainPage().open()
                 .isPageOpened()
                         .moveToElements();
         pageManager.getAlertsFrameWindowPage().goToWidgetsPage();
         pageManager.getWidgetsPage().goToAutoCompletePage()
                 .isPageOpened()
-                .useAutoComplete();
+                .useAutoComplete("Red");
     }
 }
