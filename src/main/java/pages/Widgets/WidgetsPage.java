@@ -10,15 +10,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import pages.BasePage;
-
-import java.util.List;
+import pages.Interactions.InteractionsPage;
 
 import static elements.Elements.*;
 
 public class WidgetsPage extends BasePage {
-
-    public static final By INPUT_RESULT = By.xpath("//div[@class='css-12jo7m5 auto-complete__multi-value__label']");
-    public static final By SINGLE_INPUT_RESULT = By.xpath("//div[@class='auto-complete__single-value css-1uccc91-singleValue']");
 
     public WidgetsPage(WebDriver driver) {
         super(driver);
@@ -56,7 +52,7 @@ public class WidgetsPage extends BasePage {
         return this;
     }
 
-    public WidgetsPage useAutoComplete(String value) throws InterruptedException {
+    public WidgetsPage useAutoComplete(String value) {
         Actions actions = new Actions(driver);
         WebElement multiColorInput = driver.findElement(MULTI_COLOR_INPUT);
         multiColorInput.sendKeys(value);
@@ -68,5 +64,10 @@ public class WidgetsPage extends BasePage {
         String actualValue = singleColorInput.getAttribute("value");
         Assert.assertTrue(driver.findElement(SINGLE_INPUT_RESULT).getText().contains(value), "Value not found in the input result");
         return this;
+    }
+
+    public InteractionsPage goToInteractionsPage() {
+        driver.findElement(INTERACTIONS_PAGE_BUTTON).click();
+        return new InteractionsPage(driver);
     }
 }

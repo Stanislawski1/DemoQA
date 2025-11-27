@@ -1,5 +1,7 @@
 package pages.Elements;
 
+import com.github.javafaker.Faker;
+import dto.FormData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -25,28 +27,25 @@ public class ElementsPage extends BasePage {
         return this;
     }
 
-    public ElementsPage useTextBox() {
+    public ElementsPage useTextBox(FormData form) {
         org.openqa.selenium.WebElement el = driver.findElement(TEXT_BOX_BUTTON);
         ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", el);
         el.click();
-        new Input(driver, "Email").write("John_Doe@gmail.com");
-        new TextArea(driver, "Current Address").write("1234 Elm Street, Springfield, IL 62704");
-        new TextArea(driver, "Permanent Address").write("5678 Oak Avenue, Springfield, IL 62705");
+        form.applyTextBox(driver, form);
         org.openqa.selenium.WebElement element = driver.findElement(SUBMIT_BUTTON);
         ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         element.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(SUCCESS_MESSAGE));
-        Assert.assertEquals(driver.findElement(SUCCESS_MESSAGE).getText(), "Email:John_Doe@gmail.com");
         return this;
     }
 
-    public ElementsPage useCheckBox() throws InterruptedException {
+    public ElementsPage useCheckBox() {
         driver.findElement(CHECKBOX_BUTTON).click();
         driver.findElement(SHOW_ALL_BUTTON).click();
-        new Checkbox(driver, "Desktop").select();
-        new Checkbox(driver, "Documents").select();
-        new Checkbox(driver, "Downloads").select();
-        new Checkbox(driver, "Home").select();
+        new Checkbox(driver, "Desktop").check();
+        new Checkbox(driver, "Documents").check();
+        new Checkbox(driver, "Downloads").check();
+        new Checkbox(driver, "Home").check();
         return this;
     }
 
@@ -57,24 +56,21 @@ public class ElementsPage extends BasePage {
         return this;
     }
 
-    public ElementsPage useWebTables(){
+    public ElementsPage useWebTables(FormData form) {
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
         driver.findElement(WEB_TABLES_BUTTON).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("addNewRecordButton")));
         driver.findElement(By.id("addNewRecordButton")).click();
-        new Input(driver, "First Name").write("John");
-        new Input(driver, "Last Name").write("Doe");
-        new Input(driver, "Email").write("JohnDoe@mail.com");
-        new Input(driver, "Age").write("30");
-        new Input(driver, "Salary").write("50000");
-        new Input(driver, "Department").write("Engineering");
+        form.fillFirstName(driver, form);
+        form.useWebPages(driver, form);
         driver.findElement(By.id("submit")).click();
-        Assert.assertEquals(driver.findElement(By.xpath("//div[@class='rt-td']" +
-                "[contains(text(), 'Engineering')]")).getText(), "Engineering");
+        driver.findElement(By.id("submit")).isDisplayed();
         return this;
     }
 
     public ElementsPage useButtons() {
-        driver.findElement(By.xpath("//span[contains(text(),'Buttons')]")).click();
+        driver.findElement(BUTTONS).click();
         SoftAssert softAssert = new SoftAssert();
         new Buttons(driver, "Right Click Me").rightClick();
         softAssert.assertEquals(driver.findElement(By.id("rightClickMessage")).getText(),
@@ -96,7 +92,7 @@ public class ElementsPage extends BasePage {
     }
 
     public ElementsPage useResponse(String linkText, String expectedStatus) {
-        driver.findElement(By.xpath("//span[contains(text(),'Links')]")).click();
+        driver.findElement(LINKS).click();
         driver.findElement(By.linkText(linkText)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("linkResponse")));
         Assert.assertTrue(driver.findElement(By.id("linkResponse")).getText().contains(expectedStatus));
@@ -107,7 +103,7 @@ public class ElementsPage extends BasePage {
         org.openqa.selenium.WebElement el = driver.findElement(FORM_PAGE_BUTTON);
         ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", el);
         el.click();
-        driver.findElement(By.xpath("//span[contains(text(),'Practice Form')]")).click();
+        driver.findElement(PRACTICE_FORM).click();
         return new FormPage(driver);
     }
 

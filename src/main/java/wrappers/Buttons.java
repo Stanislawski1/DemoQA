@@ -1,43 +1,45 @@
 package wrappers;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import elements.base.BaseElements;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
 
-public class Buttons {
-    WebDriver driver;
-    String label;
-    WebDriverWait wait;
+public class Buttons extends BaseElements {
 
-    public Buttons(WebDriver driver, String label) {
-        this.driver = driver;
-        this.label = label;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+    public Buttons(WebDriver driver, String text) {
+        super(driver, By.xpath("//button[normalize-space(text())='" + text + "']"));
+    }
+
+    public Buttons(WebDriver driver, By locator) {
+        super(driver, locator);
     }
 
     public void click() {
-        WebElement labelElement = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(String.format("//button[normalize-space(text())='%s']", label))
-        ));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", labelElement);
+        findElement().click();
     }
+
+    public void jsClick() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", findElement());
+    }
+
+    public void actionClick() {
+        new Actions(driver).moveToElement(findElement()).click().perform();
+    }
+
     public void doubleClick() {
-        WebElement labelElement = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(String.format("//button[normalize-space(text())='%s']", label))
-        ));
-        Actions actions = new Actions(driver);
-        actions.doubleClick(labelElement).perform();
+        new Actions(driver).doubleClick(findElement()).perform();
     }
+
+    public void ctrlClick() {
+        new Actions(driver).keyDown(Keys.CONTROL).click(findElement()).keyUp(Keys.CONTROL).perform();
+    }
+
     public void rightClick() {
-        Actions actions = new Actions(driver);
-        WebElement labelElement = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(String.format("//button[normalize-space(text())='%s']", label))
-        ));
-        actions.contextClick(labelElement).perform();
+        new Actions(driver).contextClick(findElement()).perform();
+    }
+
+    public void hover() {
+        new Actions(driver).moveToElement(findElement()).perform();
     }
 }

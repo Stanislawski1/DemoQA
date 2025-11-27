@@ -1,29 +1,18 @@
 package tests.UI;
 
 import org.testng.annotations.Test;
+import steps.WidgetsStep;
 import tests.BaseTest;
 
 public class WidgetsTests extends BaseTest {
 
     @Test
     public void testOfAccordians() {
-        pageManager.getMainPage().open()
-                .isPageOpened()
-                        .moveToElements();
-        pageManager.getAlertsFrameWindowPage().goToWidgetsPage();
-        pageManager.getWidgetsPage().goToAccordianPage()
-                .isPageOpened()
-                .useAccordian();
+        widgetsStep.goToAccordianPage();
     }
 
     @Test
-    public void testOfAutoComplete() throws InterruptedException {
-        pageManager.getMainPage().open()
-                .isPageOpened()
-                        .moveToElements();
-        pageManager.getAlertsFrameWindowPage().goToWidgetsPage();
-        pageManager.getWidgetsPage().goToAutoCompletePage()
-                .isPageOpened()
-                .useAutoComplete("Red");
+    public void testOfAutoComplete() {
+        widgetsStep.goToAutoComplete();
     }
 }
