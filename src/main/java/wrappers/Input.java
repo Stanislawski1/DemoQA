@@ -1,4 +1,5 @@
 package wrappers;
+import elements.base.BaseElements;
 import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebDriver;
@@ -7,19 +8,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class Input {
+public class Input extends BaseElements {
 
     private final WebDriver driver;
     private final WebDriverWait wait;
     private final By locator;
 
+
     public Input(WebDriver driver, By locator) {
+        super(driver, locator);
         this.driver = driver;
         this.locator = locator;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
     public Input(WebDriver driver, By locator, int timeoutSeconds) {
+        super(driver, locator);
         this.driver = driver;
         this.locator = locator;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));

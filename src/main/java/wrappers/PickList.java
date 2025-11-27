@@ -1,41 +1,23 @@
 package wrappers;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import elements.base.BaseElements;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 
-public class PickList {
-    WebDriver driver;
-    WebDriverWait wait;
-    String label;
+public class PickList extends BaseElements {
 
     public PickList(WebDriver driver, String label) {
-        this.driver = driver;
-        this.label = label;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        super(driver, By.xpath("//label[text()='" + label + "']//following::div[contains(@class,'placeholder')]"));
     }
 
     public void select(String option) {
-        WebElement labelElement = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(String.format("//label[text()='%s']//following::div[@class=' css-1wa3eu0-placeholder']", label))
-        ));
-        scrollToElement(labelElement);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", labelElement);
-
-        driver.findElement(By.xpath(String.format("//label[text()='%s']//following::div[@class=' css-1wa3eu0-placeholder']", label, option))).click();
-    }
-
-    private void scrollToElement(WebElement element) {
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", element
-        );
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block: 'end', behavior: 'smooth'});", element
-        );
+        click();
+        WebElement optionElement = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds))
+                .until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//div[contains(@class,'menu')]//div[text()='" + option + "']")
+                ));
+        optionElement.click();
     }
 }

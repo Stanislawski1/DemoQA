@@ -1,5 +1,6 @@
 package pages.Main;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -30,6 +31,18 @@ public class MainPage extends BasePage {
         org.openqa.selenium.WebElement el = driver.findElement(ELEMENTS_BUTTON);
         ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", el);
         el.click();
+        return this;
+    }
+
+    public MainPage moveToInteractions() {
+        org.openqa.selenium.WebElement el = driver.findElement(By.xpath("//h5[normalize-space()='Interactions']"));
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", el);
+        el.click();
+        return this;
+    }
+
+    public MainPage moveToBookStore() {
+
         return this;
     }
 }

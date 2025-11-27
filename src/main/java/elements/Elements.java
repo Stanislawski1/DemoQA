@@ -1,7 +1,6 @@
 package elements;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
 
 public class Elements {
 
@@ -9,7 +8,7 @@ public class Elements {
     public static final By ELEMENTS_TITLE = By.xpath("//div[@class='header-wrapper']//div[contains(text(), 'Elements')]");
     public static final By TEXT_BOX_BUTTON = By.xpath("//span[contains(text(),'Text Box')]");
     public static final By SUBMIT_BUTTON = By.xpath("//button[@id='submit']");
-    public static final By SUCCESS_MESSAGE = By.xpath("//div[contains(text(), 'Thanks for submitting the form')]");
+    public static final By SUCCESS_MESSAGE = By.xpath("//div[@class='border col-md-12 col-sm-12']");
     public static final By SHOW_ALL_BUTTON = By.xpath("//button[@title='Toggle']");
     public static final By CHECKBOX_BUTTON = By.xpath("//span[contains(text(), 'Check Box')]");
     public static final By RADIO_BUTTON_SECTION = By.xpath("//span[contains(text(),'Radio Button')]");
@@ -19,6 +18,9 @@ public class Elements {
     public static final By COMPLETE_FORM_MESSAGE = By.xpath("//div[contains(text(), 'Thanks for submitting the form')]");
     public static final By SUBMIT_FORM_BUTTON = By.xpath("//button[@type='submit']");
     public static final By SUCCESS_FORM_MESSAGE = By.xpath("//div[contains(text(), 'Thanks for submitting the form')]");
+    public static final By BUTTONS = By.xpath("//span[contains(text(),'Buttons')]");
+    public static final By LINKS = By.xpath("//span[contains(text(),'Links')]");
+    public static final By PRACTICE_FORM = By.xpath("//span[contains(text(),'Practice Form')]");
 
     //Main Page locators
     public static final By TITLE = By.xpath("//div[@class='card-body']//h5[contains(text(), 'Elements')]");
@@ -56,4 +58,25 @@ public class Elements {
 
     public static final By MULTI_COLOR_INPUT = By.id("autoCompleteMultipleInput");
     public static final By SINGLE_COLOR_INPUT = By.id("autoCompleteSingleInput");
+    public static final By END_OF_PAGE = By.xpath("//div[contains(text(), 'Select State')]");
+
+    //INTERACTION PAGE
+    public static final By INTERACTIONS_PAGE_BUTTON = By.xpath("//div[@class='header-text'][contains(text(), 'Interactions')]");
+    public static final By SORTABLE_PAGE_BUTTON = By.xpath("//span[contains(text(), 'Sortable')]");
+    public static final By SOURCE_ITEM = By.xpath("//div[@class='vertical-list-container mt-4']//div[@class='list-group-item list-group-item-action' and text()='One']");
+    public static final By TARGET_ITEM = By.xpath("//div[@class='vertical-list-container mt-4']//div[@class='list-group-item list-group-item-action' and text()='Six']");
+    public static final By GRID_BUTTON = By.xpath("//a[@id='demo-tab-grid']");
+    public static final By GRID_SOURCE_ITEM = By.xpath("//div[@class='create-grid']//div[@class='list-group-item list-group-item-action' and text()='One']");
+    public static final By GRID_TARGET_ITEM = By.xpath("//div[@class='create-grid']//div[@class='list-group-item list-group-item-action' and text()='One']");
+    public static final By SELECTABLE_BUTTON = By.xpath("//span[contains(text(), 'Selectable')]");
+    public static final String SELECTABLE_ITEM = "//ul[@id='verticalListContainer']//li[contains(text(), '%s')]";
+    public static final By RESIZABLE_BUTTON = By.xpath("//span[normalize-space()='Resizable']");
+    public static final By RESIZABLE_BOX_HANDLE = By.xpath("//div[@id='resizableBoxWithRestriction']//span[@class='react-resizable-handle react-resizable-handle-se']");
+    public static final By RESIZABLE_BOX = By.xpath("//div[@id='resizableBoxWithRestriction']");
+    public static final By POST_RESIZABLE_BOX = By.xpath("//div[@class='constraint-area']");
+    public static final By BOOK_STORE_BUTTON = By.xpath("//div[contains(text(), 'Book Store Application')]");
+
+    //WIDGETS LOCATORS
+    public static final By INPUT_RESULT = By.xpath("//div[@class='css-12jo7m5 auto-complete__multi-value__label']");
+    public static final By SINGLE_INPUT_RESULT = By.xpath("//div[@class='auto-complete__single-value css-1uccc91-singleValue']");
 }

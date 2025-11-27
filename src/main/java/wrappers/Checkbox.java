@@ -1,39 +1,28 @@
 package wrappers;
 
+import elements.base.BaseElements;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
 
-public class Checkbox {
-    WebDriver driver;
-    String label;
-    WebDriverWait wait;
+public class Checkbox extends BaseElements {
 
     public Checkbox(WebDriver driver, String label) {
-        this.driver = driver;
-        this.label = label;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        super(driver, By.xpath("//li[.//span[contains(@class,'rct-title') and normalize-space()='"+label+"']]//span[contains(@class,'rct-checkbox')]"));
     }
 
-    public void select() {
-        WebElement labelElement = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(String.format("//span[contains(text(),'%s')]", label))
-        ));
-        scrollToElement(labelElement);
-        labelElement.click();
+    public void check() {
+        if (!findElement().isSelected()) {
+            click();
+        }
     }
 
-    private void scrollToElement(WebElement element) {
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", element
-        );
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block: 'end', behavior: 'smooth'});", element
-        );
+    public void uncheck() {
+        if (findElement().isSelected()) {
+            click();
+        }
     }
 
+    public boolean isChecked() {
+        return findElement().isSelected();
+    }
 }

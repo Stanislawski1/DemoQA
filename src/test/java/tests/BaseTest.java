@@ -12,16 +12,22 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import plugins.TestListener;
 import manager.PageManager;
+import steps.ElementsSteps;
+import steps.FormsSteps;
+import steps.WidgetsStep;
 
 import java.time.Duration;
 import java.util.HashMap;
 
 @Listeners({TestListener.class})
-public class BaseTest {
+public abstract class BaseTest {
 
     protected WebDriver driver;
+    protected ElementsSteps elementsSteps;
+    protected FormsSteps formsSteps;
+    protected WidgetsStep widgetsStep;
+    protected PageManager pageManager;
 
-    public PageManager pageManager;
 
     @Parameters({"browser"})
     @BeforeMethod
@@ -49,8 +55,11 @@ public class BaseTest {
             options.addPreference("dom.webnotifications.enabled", false);
             driver = new FirefoxDriver(options);
         }
-
+        elementsSteps = new ElementsSteps(driver);
+        formsSteps = new FormsSteps(driver);
         pageManager = new PageManager(driver);
+        widgetsStep = new WidgetsStep(driver);
+
 
         context.setAttribute("driver", driver);
 

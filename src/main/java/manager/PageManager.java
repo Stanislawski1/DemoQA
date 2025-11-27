@@ -2,8 +2,10 @@ package manager;
 
 import org.openqa.selenium.WebDriver;
 import pages.Alerts.AlertsFrameWindowPage;
+import pages.BookStore.BookStorePage;
 import pages.Elements.ElementsPage;
 import pages.Form.FormPage;
+import pages.Interactions.InteractionsPage;
 import pages.Main.MainPage;
 import pages.Widgets.WidgetsPage;
 
@@ -16,6 +18,8 @@ public class PageManager {
     private ElementsPage elementsPage;
     private AlertsFrameWindowPage alertsFrameWindowPage;
     private WidgetsPage widgetsPage;
+    private InteractionsPage interactionsPage;
+    private BookStorePage bookStorePage;
 
     public PageManager(WebDriver driver) {
         this.driver = driver;
@@ -54,5 +58,19 @@ public class PageManager {
             widgetsPage = new WidgetsPage(driver);
         }
         return widgetsPage;
+    }
+
+    public  InteractionsPage getInteractionsPage() {
+        if (interactionsPage == null) {
+            interactionsPage = new InteractionsPage(driver);
+        }
+        return interactionsPage;
+    }
+
+    public  BookStorePage getBookStorePage() {
+        if (bookStorePage == null) {
+            bookStorePage = new BookStorePage(driver);
+        }
+        return bookStorePage;
     }
 }
